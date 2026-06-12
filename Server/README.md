@@ -23,6 +23,14 @@ B2B Wholesale Marketplace for Indian MSMEs
 - MongoDB Atlas + Mongoose
 - JWT Authentication
 
+## Installation
+
+```bash
+npm install express dotenv cors helmet morgan mongoose
+npm install bcryptjs jsonwebtoken
+npm install -D nodemon
+```
+
 ## Project Structure
 server/
 
