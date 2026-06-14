@@ -7,10 +7,12 @@ const {
   getMyProducts,
   updateProduct,
   deleteProduct,
+  searchProducts, // ← he missing hota
 } = require("../controllers/product.controller");
 const { protect, restrictTo } = require("../middleware/auth.middleware");
 
 // Public routes
+router.get("/search", searchProducts);
 router.get("/", getAllProducts);
 router.get("/:id", getProduct);
 

@@ -1,4 +1,5 @@
 const Product = require("../models/Product");
+const User = require("../models/User");
 const { successResponse, errorResponse } = require("../utils/apiResponse");
 
 // CREATE PRODUCT (Vendor only)
@@ -92,7 +93,6 @@ const updateProduct = async (req, res) => {
       return errorResponse(res, 404, "Product not found");
     }
 
-    // Check ownership
     if (product.vendor.toString() !== req.user.id.toString()) {
       return errorResponse(res, 403, "Not authorized to update this product");
     }
@@ -118,7 +118,6 @@ const deleteProduct = async (req, res) => {
       return errorResponse(res, 404, "Product not found");
     }
 
-    // Check ownership
     if (product.vendor.toString() !== req.user.id.toString()) {
       return errorResponse(res, 403, "Not authorized to delete this product");
     }
@@ -131,6 +130,85 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+// SEARCH & FILTERS
+const searchProducts = async (req, res) => {
+  try {
+    const {
+      keyword,
+      category,
+      minPrice,
+      maxPrice,
+      city,
+      state,
+      verifiedVendor,
+      page = 1,
+      limit = 10,
+      sortBy,
+    } = req.query;
+
+    let filter = { isActive: true };
+
+    // Keyword search
+    if (keyword) {
+      filter.$or = [
+        { name: { $regex: keyword, $options: "i" } },
+        { description: { $regex: keyword, $options: "i" } },
+      ];
+    }
+
+    // Category filter
+    if (category) filter.category = category;
+
+    // Price range filter
+    if (minPrice || maxPrice) {
+      filter.price = {};
+      if (minPrice) filter.price.$gte = Number(minPrice);
+      if (maxPrice) filter.price.$lte = Number(maxPrice);
+    }
+
+    // Location filter
+    if (city) filter.city = { $regex: city, $options: "i" };
+    if (state) filter.state = { $regex: state, $options: "i" };
+
+    // Verified vendor filter
+    if (verifiedVendor === "true") {
+      const verifiedVendors = await User.find({
+        role: "vendor",
+        isVerified: true,
+      }).select("_id");
+
+      const vendorIds = verifiedVendors.map((v) => v._id);
+      filter.vendor = { $in: vendorIds };
+    }
+
+    // Sorting
+    let sort = { createdAt: -1 };
+    if (sortBy === "newest") sort = { createdAt: -1 };
+    if (sortBy === "price_low") sort = { price: 1 };
+    if (sortBy === "price_high") sort = { price: -1 };
+
+    // Pagination
+    const skip = (Number(page) - 1) * Number(limit);
+    const total = await Product.countDocuments(filter);
+
+    const products = await Product.find(filter)
+      .populate("vendor", "name businessName city state isVerified")
+      .sort(sort)
+      .skip(skip)
+      .limit(Number(limit));
+
+    return successResponse(res, 200, "Search results!", {
+      total,
+      page: Number(page),
+      limit: Number(limit),
+      totalPages: Math.ceil(total / Number(limit)),
+      products,
+    });
+  } catch (error) {
+    return errorResponse(res, 500, error.message);
+  }
+};
+
 module.exports = {
   createProduct,
   getAllProducts,
@@ -138,4 +216,5 @@ module.exports = {
   getMyProducts,
   updateProduct,
   deleteProduct,
+  searchProducts,
 };
