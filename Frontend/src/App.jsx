@@ -1,9 +1,13 @@
-import React from 'react'
+// src/App.jsx
+import { BrowserRouter } from 'react-router-dom';
+import AppRoutes from './routes/AppRoutes';
 
 function App() {
   return (
-    <div className='p-4'>App</div>
-  )
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
