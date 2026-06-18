@@ -57,17 +57,16 @@ const register = async (req, res) => {
 // ─── LOGIN ───────────────────────────────────
 const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+      let { email, password } = req.body;
 
-    // Email aur password dono chahiye
-    if (!email || !password) {
-      return errorResponse(res, 400, 
-        "Email and password required"
-      );
-    }
+      // Email aur password dono chahiye
+      if (!email || !password) {
+        return errorResponse(res, 400, 
+          "Email and password required"
+        );
+      }
 
-    // User dhundho — password bhi lao
-    const user = await User.findOne({ email }).select("+password");
+      email = email.toLowerCase().trim();
 
     if (!user) {
       return errorResponse(res, 401, "Invalid credentials");

@@ -1,0 +1,172 @@
+[{
+  "_id": {
+    "$oid": "6a2bf8c5305fa5b8cd11f599"
+  },
+  "name": "Jagdish Sonawane",
+  "email": "jagdish@40shops.com",
+  "phone": "9322194013",
+  "password": "$2b$12$g7Fv1OqnqJ1gUsoxRum85ObHmYLz8.rDY1i5xn1VdcCGpDOFj35r.",
+  "role": "vendor",
+  "businessName": "Sonawane Textiles Pvt Ltd",
+  "city": "Aurangabad",
+  "state": "Maharashtra",
+  "isVerified": true,
+  "isActive": true,
+  "profilePhoto": "",
+  "createdAt": {
+    "$date": "2026-06-12T12:17:09.389Z"
+  },
+  "updatedAt": {
+    "$date": "2026-06-14T10:45:46.657Z"
+  },
+  "__v": 0,
+  "gstin": "27AABCS1429B1ZB",
+  "pincode": "431001"
+},
+{
+  "_id": {
+    "$oid": "6a2cb5c167776063ccd28d5f"
+  },
+  "name": "Rahul Sharma",
+  "email": "rahul@buyer.com",
+  "phone": "9123456780",
+  "password": "$2b$12$sfhE2jQik1NLy0pUzava9.WvHZoOQjPR1hGj16pddNmqFUQBit2P6",
+  "role": "buyer",
+  "city": "Pune",
+  "state": "Maharashtra",
+  "isVerified": false,
+  "isActive": true,
+  "profilePhoto": "",
+  "createdAt": {
+    "$date": "2026-06-13T01:43:29.868Z"
+  },
+  "updatedAt": {
+    "$date": "2026-06-13T01:43:29.868Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a2dabc617301dc03867fae9"
+  },
+  "name": "Admin User",
+  "email": "admin@40shops.com",
+  "phone": "9999999999",
+  "password": "$2a$10$ORWNo.TTnJBBWbRcKDTNjuxHe65N1JBVFA94Zvw5LhcpZ9GdNrali",
+  "role": "admin",
+  "isVerified": false,
+  "createdAt": {
+    "$date": "2026-06-13T19:13:10.490Z"
+  },
+  "updatedAt": {
+    "$date": "2026-06-13T19:13:10.490Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a2e829d9fdb15ecd98d1ce3"
+  },
+  "name": "Admin User",
+  "email": "superadmin@40shops.com",
+  "phone": "8888888888",
+  "password": "$2b$12$eC2XcAnRlOp.RlQ/b9pIw.EGps1sGjk7vphM1a7dp9UEA27KogIoO",
+  "role": "admin",
+  "city": "Mumbai",
+  "state": "Maharashtra",
+  "isVerified": false,
+  "isActive": true,
+  "profilePhoto": "",
+  "createdAt": {
+    "$date": "2026-06-14T10:29:49.066Z"
+  },
+  "updatedAt": {
+    "$date": "2026-06-14T10:29:49.066Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a2edfb84fcb5e8c91f9d899"
+  },
+  "name": "Ravi Patil",
+  "email": "ravi@40shops.com",
+  "phone": "7777777777",
+  "password": "$2b$12$01IEHpAN3kMfw91IfJZxF.raGQkQroVMzuuCnsFYs9EGNd5aOaIl6",
+  "role": "buyer",
+  "isVerified": false,
+  "isActive": true,
+  "profilePhoto": "",
+  "createdAt": {
+    "$date": "2026-06-14T17:07:04.681Z"
+  },
+  "updatedAt": {
+    "$date": "2026-06-14T17:07:04.681Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a2ee2f94fcb5e8c91f9d89a"
+  },
+  "name": "Harshal Bhadane",
+  "email": "harshal@40shops.com",
+  "phone": "9922445364",
+  "password": "$2b$12$580Lu7CiAVGG8kC.XvKUeOo0/BHEtM5KBGkH0Kjz7vBDdDVkCJ7h6",
+  "role": "buyer",
+  "isVerified": false,
+  "isActive": true,
+  "profilePhoto": "",
+  "createdAt": {
+    "$date": "2026-06-14T17:20:57.619Z"
+  },
+  "updatedAt": {
+    "$date": "2026-06-14T17:20:57.619Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a2ee70d4fcb5e8c91f9d89b"
+  },
+  "name": "Atharv Vispute",
+  "email": "atharv@40shops.com",
+  "phone": "9028508504",
+  "password": "$2b$12$h0yCX4Qfby49F6y6NpKVKu3c7X7Y4hMWj9pIcxOEjWqdlnEOFwgqS",
+  "role": "vendor",
+  "isVerified": false,
+  "isActive": true,
+  "profilePhoto": "",
+  "createdAt": {
+    "$date": "2026-06-14T17:38:21.553Z"
+  },
+  "updatedAt": {
+    "$date": "2026-06-14T17:38:21.553Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a33d0b10f845a947637b6dc"
+  },
+  "name": "Piyush Savale",
+  "email": "deadlyg868@gmail.com",
+  "phone": "9370490179",
+  "password": "$2b$12$xvMJC1bCkWmbLC3UKOaEFuNmRmCL9sSY1zq/vamUeELH917bqI3Fy",
+  "role": "buyer",
+  "businessName": "",
+  "gstin": "",
+  "city": "nashik",
+  "state": "Maharastra",
+  "pincode": "422009",
+  "isVerified": false,
+  "isActive": true,
+  "profilePhoto": "",
+  "createdAt": {
+    "$date": "2026-06-18T11:04:17.801Z"
+  },
+  "updatedAt": {
+    "$date": "2026-06-18T11:04:17.801Z"
+  },
+  "__v": 0
+}]
