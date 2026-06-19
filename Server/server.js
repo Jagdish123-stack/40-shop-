@@ -26,6 +26,11 @@ app.use("/api/payments", require("./src/routes/payment.routes"));
 app.use("/api/crisis", require("./src/routes/crisis.routes"));
 app.use("/api/vendor", require("./src/routes/vendor.routes"));
 app.use("/api/admin", require("./src/routes/admin.routes"));
+app.use("/api/ai", require("./src/routes/ai.routes"));
+app.use("/api/rfq", require("./src/routes/rfq.routes"));           
+app.use("/api/flash-deals", require("./src/routes/flashdeal.routes")); 
+app.use("/api/invoice", require("./src/routes/invoice.routes"));   
+app.use("/api/logistics", require("./src/routes/logistics.routes"));
 
 // Test route
 app.get("/", (req, res) => {

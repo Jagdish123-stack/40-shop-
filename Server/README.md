@@ -8,16 +8,24 @@ B2B Wholesale Marketplace for Indian MSMEs (Alibaba for India)
 - MongoDB Atlas + Mongoose
 - JWT Authentication
 - Helmet, Morgan, CORS
+- Groq AI (llama-3.3-70b-versatile)
 
 ---
 
 ## Installation
 ```bash
+# Core packages
 npm install express dotenv cors helmet morgan mongoose
 npm install bcryptjs jsonwebtoken
+
+# AI packages
+npm install groq-sdk
+npm install @google/generative-ai
+npm install openai
+
+# Dev dependency
 npm install -D nodemon
 ```
-
 ---
 
 ## Local Setup
@@ -48,7 +56,6 @@ npm run dev
 
 Expected output:
 🚀 Server running on http://localhost:5000
-
 MongoDB Connected: cluster0.xxxxx.mongodb.net
 
 ---
@@ -56,28 +63,19 @@ MongoDB Connected: cluster0.xxxxx.mongodb.net
 ## Project Structure
 
 server/
-
 ├── src/
-
 │   ├── config/         → Database connection
-
 │   ├── controllers/    → Business logic
-
 │   ├── middleware/     → Auth, error handling
-
 │   ├── models/         → MongoDB schemas
-
 │   ├── routes/         → API endpoints
-
-│   ├── services/       → External APIs
-
+│   ├── services/       → External APIs (AI, Logistics)
 │   └── utils/          → Helper functions
-
 ├── .env.example
-
 ├── server.js
-
 └── package.json
+
+---
 
 ---
 
@@ -99,6 +97,7 @@ server/
 | PUT | `/api/products/:id` | Update product | Vendor |
 | DELETE | `/api/products/:id` | Delete product | Vendor |
 | GET | `/api/products/vendor/my-products` | My products | Vendor |
+| GET | `/api/products/search` | Search + filters | ❌ |
 
 ### 🛒 Orders
 | Method | Endpoint | Description | Auth |
@@ -136,6 +135,53 @@ server/
 | GET | `/api/vendor/profile` | Vendor profile | Vendor |
 | PUT | `/api/vendor/subscription` | Update subscription | Vendor |
 
+### 👑 Admin Panel
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| GET | `/api/admin/dashboard` | Dashboard stats | Admin |
+| GET | `/api/admin/users` | All buyers | Admin |
+| GET | `/api/admin/vendors` | All vendors | Admin |
+| PUT | `/api/admin/vendor/:id/approve` | Approve vendor | Admin |
+| PUT | `/api/admin/vendor/:id/reject` | Reject vendor | Admin |
+| DELETE | `/api/admin/user/:id` | Delete user | Admin |
+
+### 🤖 AI Features
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| POST | `/api/ai/search` | Vernacular search (Hindi/Marathi) | ❌ |
+| POST | `/api/ai/photo-search` | Photo to product search | ❌ |
+| POST | `/api/ai/optimize-listing` | AI listing optimizer | Vendor |
+| GET | `/api/ai/demand/:productId` | Demand prediction | Vendor |
+
+### 📋 RFQ System
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| POST | `/api/rfq` | Create RFQ | Buyer |
+| GET | `/api/rfq` | All open RFQs | Vendor |
+| GET | `/api/rfq/my-rfqs` | My RFQs | Buyer |
+| POST | `/api/rfq/:id/respond` | Submit quote | Vendor |
+| PUT | `/api/rfq/:id/accept-quote` | Accept quote | Buyer |
+| PUT | `/api/rfq/:id/close` | Close RFQ | Buyer |
+
+### ⚡ Flash Deals
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| GET | `/api/flash-deals/active` | Active deals | ❌ |
+| POST | `/api/flash-deals` | Create deal | Vendor |
+| GET | `/api/flash-deals/my-deals` | My deals | Vendor |
+| PUT | `/api/flash-deals/:id/deactivate` | Deactivate | Vendor |
+
+### 🧾 GST Invoice
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| GET | `/api/invoice/:orderId` | Generate invoice | ✅ |
+
+### 🚚 Logistics
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| GET | `/api/logistics/rates` | Compare couriers | ✅ |
+| POST | `/api/logistics/book` | Book shipment | Vendor |
+
 
 ❌ = No token required (anyone can access)
 ✅ = Token required (logged in user only)
@@ -159,6 +205,8 @@ admin   → Platform admin
 
 ---
 
+---
+
 ## Feature Status
 | Feature | Status |
 |---------|--------|
@@ -170,11 +218,32 @@ admin   → Platform admin
 | Payment/Escrow | ✅ Done |
 | Crisis Alert | ✅ Done |
 | Vendor Onboarding | ✅ Done |
-| Admin Panel | ⏳ Pending |
-| Search & Filters | ⏳ Pending |
+| Admin Panel | ✅ Done |
+| Search & Filters | ✅ Done |
+| AI Features (Groq) | ✅ Done |
+| Vernacular Search | ✅ Done |
+| Photo to Product Search | ✅ Done |
+| Demand Prediction | ✅ Done |
+| AI Listing Optimizer | ✅ Done |
+| RFQ System | ✅ Done |
+| Flash Deals | ✅ Done |
+| GST Invoice | ✅ Done |
+| Logistics Aggregator | ✅ Done |
 | WhatsApp Bot | ⏳ Pending |
-| AI Features | ⏳ Pending |
 
 ---
 
-*40shops — Connecting Indian MSMEs* 🇮🇳
+---
+## Environment Variables
+
+`.env` madhe he sagle add kara:
+
+```env
+PORT=5000
+MONGO_URI=mongodb+srv://username:password@cluster0.xxxxx.mongodb.net/40shops
+JWT_SECRET=your_secret_key
+JWT_EXPIRES_IN=7d
+
+# AI
+GROQ_API_KEY=your_groq_api_key
+API Keys Kadhaychi kashi:Groq (Free) https://console.groq.com 
