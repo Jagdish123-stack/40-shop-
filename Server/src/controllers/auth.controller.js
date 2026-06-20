@@ -57,22 +57,20 @@ const register = async (req, res) => {
 // ─── LOGIN ───────────────────────────────────
 const login = async (req, res) => {
   try {
-      let { email, password } = req.body;
+    let { email, password } = req.body;
 
-      // Email aur password dono chahiye
-      if (!email || !password) {
-        return errorResponse(res, 400, 
-          "Email and password required"
-        );
-      }
+    if (!email || !password) {
+      return errorResponse(res, 400, "Email and password required");
+    }
 
-      email = email.toLowerCase().trim();
+    email = email.toLowerCase().trim();
+
+    const user = await User.findOne({ email }).select("+password");
 
     if (!user) {
       return errorResponse(res, 401, "Invalid credentials");
     }
 
-    // Password match karo
     const isMatch = await user.comparePassword(password);
 
     if (!isMatch) {
@@ -93,7 +91,6 @@ const login = async (req, res) => {
         state: user.state,
       },
     });
-
   } catch (error) {
     return errorResponse(res, 500, error.message);
   }
